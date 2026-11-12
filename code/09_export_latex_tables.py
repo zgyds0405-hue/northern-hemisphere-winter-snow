@@ -59,5 +59,12 @@ def main():
     tabular("table_spatial", "lrrrr", ["分组", r"面积 ($10^6$ km$^2$)",
             "SCF (pp)", "SWE (mm)", r"T2m ($^\circ$C)"], rows)
 
+    data = pd.read_csv(CSV / "snowline_paired_shifts.csv").query("rule == 'main' and longitude_block_deg == 10")
+    rows = []
+    for a in data.itertuples():
+        rows.append([f"{a.threshold:.2f}", GROUPS[a.region], a.paired_n_longitudes,
+                     interval(a.paired_median_shift_deg, a.spatial_bootstrap_ci95_low, a.spatial_bootstrap_ci95_high, 3)])
+    tabular("table_boundary", "llrr", ["SCF 阈值", "范围", "配对经度数", r"纬度位移 ($^\circ$) [95\% CI]"], rows)
+
 if __name__ == "__main__":
     main()
