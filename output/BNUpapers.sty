@@ -1,0 +1,156 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%BNU课程论文模板
+%%作者：LeyuDame
+%%License：Creative Commons CC BY 4.0
+%%GitHub：https://github.com/LeyuDame/BNUpapers
+%%Overleaf：https://www.overleaf.com/latex/templates/bnuke-cheng-lun-wen-mo-ban/bcwvxncqffkw
+
+%%最后更改于2023/4/12
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%在"北大课程论文模板"基础上修改而来
+%%原作者：Shawn Wang
+%%Overleaf地址：https://www.overleaf.com/latex/templates/bei-jing-da-xue-ke-cheng-lun-wen-mo-ban/yntmqcktrzfh
+
+%%更换了封面logo
+%%新建了BNUpapers宏包，将大部分与正文无关的设定也放在了sty文件里
+%%新增了bibtex的引用方式
+%%增加了一些图、定理等环境的中文引用名称
+
+\ProvidesPackage{BNUpapers}
+
+%%页边距
+\RequirePackage[left=2.50cm, right=2.50cm, top=2.50cm, bottom=2.50cm]{geometry}
+
+%%一些必要的宏包
+\RequirePackage[unicode=true,colorlinks,urlcolor=blue,linkcolor=blue,bookmarksnumbered=true]{hyperref}
+\RequirePackage{latexsym,amssymb,amsmath,amsbsy,amsopn,amstext,amsthm,amsxtra,color,bm,calc,ifpdf}
+\RequirePackage{graphicx}
+\RequirePackage{enumerate}
+\RequirePackage{fancyhdr}
+\RequirePackage{listings}
+\RequirePackage{multirow}
+\RequirePackage{makeidx}
+\RequirePackage{xcolor}
+\RequirePackage{fontspec}
+\RequirePackage{subfigure}
+\PassOptionsToPackage{hyphens}{url}
+\RequirePackage{hyperref}
+% 本报告不使用代码高亮，减少编译依赖。
+
+\RequirePackage{tcolorbox}
+
+% 本报告不使用图标字体。
+
+%% 更改摘要二字的样式
+\renewcommand{\abstractname}{\textbf{\large {摘\quad 要}}}
+
+%%对一些autoref的中文引用名作修改
+\def\equationautorefname{式}
+\def\footnoteautorefname{脚注}
+\def\itemautorefname{项}
+\def\figureautorefname{图}
+\def\tableautorefname{表}
+\def\partautorefname{篇}
+\def\appendixautorefname{附录}
+\def\chapterautorefname{章}
+\def\sectionautorefname{节}
+\def\subsectionautorefname{小小节}
+\def\subsubsectionautorefname{subsubsection}
+\def\paragraphautorefname{段落}
+\def\subparagraphautorefname{子段落}
+\def\FancyVerbLineautorefname{行}
+\def\theoremautorefname{定理}
+
+\newtheorem{Theorem}{定理}[section]
+\newtheorem{Lemma}[Theorem]{引理}
+\newtheorem{Corollary}[Theorem]{推论}
+\newtheorem{Proposition}[Theorem]{命题}
+\newtheorem{Definition}[Theorem]{定义}
+\newtheorem{Example}[Theorem]{例}
+
+%%参考文献设置
+\newcommand{\reference}{
+%\nocite{*}   %打开此选项会列出bib里面的所有参考文献
+\bibliographystyle{unsrt} %规定了参考文献的格式
+\begin{center}%居中
+	\bibliography{reference} %调出LaTeX生成参考文献列表
+\end{center}
+}
+%%文本框设置
+\newcommand{\tbox}[1]{
+\begin{center}
+\begin{tcolorbox}[colback=gray!10,%gray background
+                  colframe=black,% black frame colour
+                  width=8cm,% Use 8cm total width,
+                  arc=1mm, auto outer arc,
+                  boxrule=0.5pt,
+                 ]
+{#1}
+\end{tcolorbox}
+\end{center}
+}
+
+%%页眉设置
+\pagestyle{fancy}
+\fancyhead[L]{\fangsong\courseinfo}
+\fancyhead[C]{}%%留空则不显示
+\fancyhead[R]{}
+
+
+%% 封面信息由主文档的导言区填写。
+\newcommand{\papertitle}{}
+\newcommand{\courseinfo}{}
+\newcommand{\supervisor}{}
+\newcommand{\studentone}{}
+\newcommand{\studentoneid}{}
+
+%%只显示现有 PDF 中的蓝色中文校名，裁去校徽、英文和四周留白。
+%%若替换校名图片，请相应调整或去掉 trim 和 clip。
+\newcommand{\coverlogo}{%
+    \includegraphics[width=11.8cm,
+        trim=290bp 240bp 120bp 174bp,clip]{figures/bnu.pdf}%
+}
+
+%%标签等宽分布，姓名列、学号标签列、学号列分别对齐
+\newcommand{\coverlabel}[1]{\makebox[3cm][s]{#1}}
+
+%%封面独占一页，不显示页眉、页脚或日期
+\newcommand{\cover}{%
+    \begin{titlepage}
+        \hypersetup{pageanchor=false}
+        \thispagestyle{empty}
+        \centering
+        \vspace*{-1.0cm}
+        \coverlogo\par
+
+        \vspace{2.0cm}
+        {\heiti\bfseries\fontsize{42pt}{54pt}\selectfont
+            \makebox[8cm][s]{课程论文}\par}
+
+        \vspace{2.8cm}
+        \begin{minipage}[c][3.0cm][c]{0.96\textwidth}
+            \centering
+            \songti\bfseries\zihao{2}
+            \setlength{\parindent}{0pt}
+            % 左右使用有限、等量的弹性空白，让长题目更均衡地换行。
+            \setlength{\leftskip}{0pt plus 0.5\linewidth}
+            \setlength{\rightskip}{0pt plus 0.5\linewidth}
+            \setlength{\parfillskip}{0pt}
+            \papertitle\par
+        \end{minipage}\par
+
+        \vspace{1.4cm}
+        {\songti\zihao{3}
+            \renewcommand{\arraystretch}{1.25}
+            \setlength{\tabcolsep}{0pt}
+            \begin{tabular}{p{3.35cm}p{3.35cm}p{2.05cm}p{4cm}}
+                \coverlabel{课程信息：} & \multicolumn{3}{p{9.4cm}}{\courseinfo} \\[0.55cm]
+                \coverlabel{指导老师：} & \multicolumn{3}{p{9.4cm}}{\supervisor} \\[0.75cm]
+                \coverlabel{学生姓名：} & \studentone & 学号： & \studentoneid
+            \end{tabular}\par
+        }
+        \vfill
+    \end{titlepage}%
+}

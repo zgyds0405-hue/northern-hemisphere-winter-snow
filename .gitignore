@@ -1,0 +1,27 @@
+# Generated research data and figures are reproducible from the local input archive.
+/logs/
+/output/processed/
+/output/csv/
+/output/figures/
+/output/region_masks/
+/output/agent_climate/
+/output/agent_snowline/
+/output/agent_spatial/
+/output/agent_trend/
+/output/agent_mechanism/csv/
+/output/agent_mechanism/figures/
+/output/agent_mechanism/*.csv
+/output/agent_mechanism/review.md
+/snow_project_output/csv/
+/snow_project_output/figures/
+/snow_project_output/tables/
+/snow_project_output/README.txt
+/output/*.pdf
+/output/*.log
+/output/*.aux
+/output/*.out
+/output/*.toc
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
