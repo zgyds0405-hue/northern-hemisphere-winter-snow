@@ -1,11 +1,7 @@
-\section{代码说明}
+\section{代码与 AI 辅助说明}
 
-研究代码按数据预处理、统计分析、绘图和质量核对组织。所有脚本从项目根目录执行，输入归档由 \nolinkurl{code/00_preprocess.py} 读取。该脚本核对三个 NetCDF 的变量、单位、时间和掩膜，按每月实际天数聚合 DJF 冬季，并把冬季场、备用场核对结果及元数据审计记录分别写入 \nolinkurl{output/processed/}、\nolinkurl{output/csv/} 和 \nolinkurl{logs/}。
+分析、绘图和质量核对代码及复现步骤见 \href{https://github.com/zgyds0405-hue/northern-hemisphere-winter-snow}{GitHub 仓库}。
 
-\nolinkurl{code/03_global_metrics.py} 与 \nolinkurl{code/04_grid_trends_mk_sen.py} 计算全域年度指标、格点趋势及显著性。\nolinkurl{code/05_region_latitude_analysis.py} 构建代表窗口和纬度带，比较覆盖率、SWE 和气温趋势。\nolinkurl{code/06_temperature_response.py} 计算控制年份后的温度关联、跨冬季滞后与组间差异。\nolinkurl{code/07_threshold_snowline.py} 提取 SCF 阈值等值线、逐经度边界及阈值敏感性。\nolinkurl{code/07b_assimilation_sensitivity.py} 与 \nolinkurl{code/08_swe_tail.py} 检查结果对同化断点和极高 SWE 格点的敏感度。
+\textbf{AI 辅助提示词摘要：}“仅基于提供的 SCF、SWE 和 T2m 数据，协助编写与核对可复现代码、图件和中文报告；不引入其他研究数据，不编造结果，并说明不确定性与数据局限。”
 
-\nolinkurl{code/08_domain_figure.py}、\nolinkurl{code/08_trend_figures.py}、\nolinkurl{code/08_spatial_figures.py}、\nolinkurl{code/08_snowline_figures.py} 与 \nolinkurl{code/08_synthesis_figures.py} 生成文中图件。\nolinkurl{code/figure_style.py} 统一字体、颜色、地图坐标和导出设置。\nolinkurl{code/09_export_latex_tables.py} 从 CSV 生成正文表格。\nolinkurl{code/10_quality_control.py} 核对年度指标、图件及编译后的报告。\nolinkurl{output/agent_mechanism/assimilation_checks.py} 提供独立的同化断点复核。
-
-运行顺序、依赖版本、随机种子和编译命令见 \nolinkurl{README.md} 与 \nolinkurl{requirements.txt}。脚本读取原始归档并重建结果。公开代码见 \href{https://github.com/zgyds0405-hue/northern-hemisphere-winter-snow}{GitHub 仓库}。
-
-AI 辅助代码、图件及文字制作；数值由脚本计算，并经作者核验。
+AI 用于代码、图件和文字的草拟与检查；统计量由脚本计算，结果由作者核验。
